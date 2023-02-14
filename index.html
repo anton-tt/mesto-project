@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Четвёртый проект: Место-Россия (+js) </title>
+    <link rel="stylesheet" href="pages/index.css">
+</head>
+
+<body class="page">
+  <header class="header">
+    <div class="header__logo"></div>
+  </header>
+  
+  <main class="content">
+    <section class="profile">
+      <div class="profile__user">
+        <img class="profile__photo" src="images/avatar.jpg" alt="Фотография пользователя">
+        <div class="profile__info">
+          <div class="profile__info-edit">
+            <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+            <button class="profile__button-edit" type="button" aria-label="Редактировать информацию в профиле"></button>
+          </div>
+          <p class="profile__user-profession">Исследователь океана</p>
+        </div>  
+      </div>
+      <button class="profile__button-add" type="button" aria-label="Добавить информацию в профиль"></button>
+    </section>
+
+    <section class="elements">
+      <ul class="elements__cards"></ul>
+    </section>
+  </main> 
+
+  <footer class="footer">
+    <p class="footer__copyright">&copy; Mesto Russia</p>
+  </footer>
+
+  <div class="popup popup_edit"> <!-- popup_opened -->
+    <div class="popup__container">
+      <button class="popup__close-button popup__close-button_edit" type="button" aria-label="Кнопка Закрыть всплывающее окно"></button>
+      <div class="popup__box">
+        <h3 class="popup__title-box">Редактировать профиль</h3>
+        <form class="popup__form" type="submit" id="user" name="user">
+          <input class="popup__info popup__info_input_name" type="text" name="username" placeholder="Имя пользователя">
+          <input class="popup__info popup__info_input_profession" type="text" name="userprof" placeholder="Профессия"> 
+          <button class="popup__button-save popup__button-save_edit" type="submit" aria-label="Кнопка Сохранить данные карточки">Сохранить</button>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="popup popup_add"> <!-- popup_opened -->
+    <div class="popup__container">
+      <button class="popup__close-button popup__close-button_add" type="button" aria-label="Кнопка Закрыть всплывающее окно"></button>
+      <div class="popup__box">
+        <h3 class="popup__title-box">Новая карточка</h3>
+        <form class="popup__form" type="submit" id="location" name="location"> 
+          <input class="popup__info popup__info_input_place" type="text" name="locplace" placeholder="Название">
+          <input class="popup__info popup__info_input_link" type="url" name="loclink" placeholder="Ссылка на картинку">
+          <button class="popup__button-save popup__button-save_add" type="submit" aria-label="Кнопка Сохранить данные карточки">Сохранить</button>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="popup popup_photo"> <!-- popup_opened -->
+    <div class="popup__container">
+      <button class="popup__close-button popup__close-button_photo" type="button" aria-label="Кнопка Закрыть всплывающее окно"></button>
+      <div class="popup__card">
+        <img class="popup__image" alt="Фотография Места">
+        <h2 class="popup__inscription"></h2>
+      </div>
+    </div>
+  </div>
+
+  <template id="card-element">
+    <li class="element">
+      <img class="element__card-photo" alt="Фотография Места">
+      <div class="element__card-inscription">
+        <h2 class="element__card-name"></h2>
+        <button class="element__card-like" type="button" aria-label="Кнопка Нравится"></button> <!--element__card-like_active-->
+      </div>
+      <div class="element__card-trash" ></div>
+    </li>
+  </template>
+  <script src="constants.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
