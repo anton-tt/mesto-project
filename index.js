@@ -198,3 +198,41 @@ function closePopupEscape (event) {
     closePopup(popupOpened);
   }
 };
+
+
+
+
+// Вынесем все необходимые элементы формы в константы
+const formElement = page.querySelector('.popup__form');
+const formInput = formElement.querySelector('.popup__info');
+
+ 
+
+/* задаём функции, которая добавит полю формы класс с ошибкой и которая удалит этот класс */
+const showInputError = (element) => {
+  element.classList.add('popup__info_input_error');
+};
+const hideInputError = (element) => {
+  element.classList.remove('form__input_type_error');
+};
+
+// Функция, которая проверяет валидность поля
+const isValid = () => {
+  if (!formInput.validity.valid) {
+    // Если поле не проходит валидацию, покажем ошибку
+    showInputError(formInput);
+  } else {
+    // Если проходит, скроем
+    hideInputError(formInput);
+  }
+};
+
+// Вызовем функцию isValid на каждый ввод символа
+formInput.addEventListener('input', isValid); 
+
+/* Слушатель события input
+formInput.addEventListener('input', function (evt) {
+  // Выведем в консоль значение свойства validity.valid поля ввода, 
+  // на котором слушаем событие input
+  console.log(evt.target.validity.valid);
+});*/

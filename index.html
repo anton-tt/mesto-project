@@ -42,10 +42,10 @@
       <button class="popup__close-button popup__close-button_edit" type="button" aria-label="Кнопка Закрыть всплывающее окно"></button>
       <div class="popup__box">
         <h3 class="popup__title-box">Редактировать профиль</h3>
-        <form class="popup__form" type="submit" id="user" name="user">
-          <input class="popup__info popup__info_input_name" type="text" name="username" placeholder="Имя пользователя">
-          <input class="popup__info popup__info_input_profession" type="text" name="userprof" placeholder="Профессия"> 
-          <button class="popup__button-save popup__button-save_edit" type="submit" aria-label="Кнопка Сохранить данные карточки">Сохранить</button>
+        <form class="popup__form" type="submit" id="user" name="user" novalidate>
+          <input class="popup__info popup__info_input_name" type="text" name="username" placeholder="Имя пользователя" required minlength="2" maxlength="40" pattern="^[а-яА-ЯёЁa-zA-Z0-9]+$" data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы">
+          <input class="popup__info popup__info_input_profession" type="text" name="userprof" placeholder="Профессия" required minlength="2" maxlength="200" pattern="^[а-яА-ЯёЁa-zA-Z0-9]+$" data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы"> 
+          <button class="popup__button-save popup__button-save_edit" type="submit" disabled aria-label="Кнопка Сохранить данные карточки">Сохранить</button>
         </form>
         
       </div>
@@ -57,10 +57,10 @@
       <button class="popup__close-button popup__close-button_add" type="button" aria-label="Кнопка Закрыть всплывающее окно"></button>
       <div class="popup__box">
         <h3 class="popup__title-box">Новая карточка</h3>
-        <form class="popup__form" type="submit" id="location" name="location"> 
-          <input class="popup__info popup__info_input_place" type="text" name="locplace" placeholder="Название">
-          <input class="popup__info popup__info_input_link" type="url" name="loclink" placeholder="Ссылка на картинку">
-          <button class="popup__button-save popup__button-save_add" type="submit" aria-label="Кнопка Сохранить данные карточки">Сохранить</button>
+        <form class="popup__form" type="submit" id="location" name="location" novalidate> 
+          <input class="popup__info popup__info_input_place" type="text" name="locplace" placeholder="Название" required minlength="2" maxlength="30" pattern="^[а-яА-ЯёЁa-zA-Z0-9]+$" data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы">
+          <input class="popup__info popup__info_input_link" type="url" name="loclink" placeholder="Ссылка на картинку" required>
+          <button class="popup__button-save popup__button-save_add" type="submit" disabled aria-label="Кнопка Сохранить данные карточки">Сохранить</button>
         </form>
         
       </div>
