@@ -6,9 +6,13 @@ const popupPhoto = page.querySelector('.popup_photo');
 /* задаём функции с одним параметром, которые открывают - закрывают popup */ 
 function openPopup(popup) { 
   popup.classList.add('popup_opened');
+  page.addEventListener('click', closePopupClick);
+  page.addEventListener('keyup', closePopupEscape); 
 };
 function closePopup(popup) { 
   popup.classList.remove('popup_opened');
+  page.removeEventListener('click', closePopupClick);
+  page.removeEventListener('keyup', closePopupEscape); 
 };
 
 /* задаём переменные для обращения к кнопкам edit и add в профиле*/
@@ -126,8 +130,11 @@ function editInfoProfile() {
   profileUserProfession.textContent = userProfForm.value;
 };
 
-/* задаём действие - при клике на крестик-edit закрывается popup-edit */ 
+const popupBox = popupEditProfile.querySelector('.popup__box');
+
+/* задаём действия - при клике на крестик-edit закрывается popup-edit */ 
 popupCloseButtonEdit.addEventListener('click', closePopupEdit);
+
 
 /* задаём функцию, которая будет отправлять данные, введённые пользователем в форму edit, на сервер 
 и передавать их в профиль, запускается через слушателя событий submit для формы и при клике на кнопку Сохранить-edit */
@@ -176,3 +183,18 @@ function closePopupPhoto() {
   closePopup(popupPhoto);
 };
 popupCloseButtonPhoto.addEventListener('click', closePopupPhoto);
+
+/* задаём функцию - при клике на "тёмный фон" закрывается любой открытый popup */
+function closePopupClick(event) {
+  if (event.target.classList.contains('popup_opened')) {
+    closePopup(event.target);
+  }
+};
+
+/* задаём функцию - при срабатывании клавиши Esc закрывается любой открытый popup */
+function closePopupEscape (event) {
+  const popupOpened = page.querySelector('.popup_opened');
+  if (event.key === 'Escape') {
+    closePopup(popupOpened);
+  }
+};
