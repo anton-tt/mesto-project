@@ -43,11 +43,13 @@
       <div class="popup__box">
         <h3 class="popup__title-box">Редактировать профиль</h3>
         <form class="popup__form" type="submit" id="user" name="user" novalidate>
-          <input class="popup__info popup__info_input_name" type="text" name="username" placeholder="Имя пользователя" required minlength="2" maxlength="40" pattern="^[а-яА-ЯёЁa-zA-Z0-9]+$" data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы">
-          <input class="popup__info popup__info_input_profession" type="text" name="userprof" placeholder="Профессия" required minlength="2" maxlength="200" pattern="^[а-яА-ЯёЁa-zA-Z0-9]+$" data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы"> 
+          <input class="popup__info popup__info_input_name" type="text" name="username" id="username" placeholder="Имя пользователя" required minlength="2" maxlength="40" pattern="^[а-яА-ЯёЁa-zA-Z0-9]+$" data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы">
+          <span class="popup__errorInput popup__errorInput_id_username" >ОШИБКА</span>
+          <input class="popup__info popup__info_input_profession" type="text"  name="userprof" id="userprof" placeholder="Профессия" required minlength="2" maxlength="200" pattern="^[а-яА-ЯёЁa-zA-Z0-9]+$" data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы"> 
+          <span class="popup__errorInput popup__errorInput_id_userprof" ></span>
           <button class="popup__button-save popup__button-save_edit" type="submit" disabled aria-label="Кнопка Сохранить данные карточки">Сохранить</button>
         </form>
-        
+        <!--id="hh"-->
       </div>
     </div>
   </div>
@@ -58,11 +60,12 @@
       <div class="popup__box">
         <h3 class="popup__title-box">Новая карточка</h3>
         <form class="popup__form" type="submit" id="location" name="location" novalidate> 
-          <input class="popup__info popup__info_input_place" type="text" name="locplace" placeholder="Название" required minlength="2" maxlength="30" pattern="^[а-яА-ЯёЁa-zA-Z0-9]+$" data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы">
-          <input class="popup__info popup__info_input_link" type="url" name="loclink" placeholder="Ссылка на картинку" required>
-          <button class="popup__button-save popup__button-save_add" type="submit" disabled aria-label="Кнопка Сохранить данные карточки">Сохранить</button>
+          <input class="popup__info popup__info_input_place" type="text" name="locplace" id="locplace" placeholder="Название" required minlength="2" maxlength="30" pattern="^[а-яА-ЯёЁa-zA-Z0-9]+$" data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы">
+          <span class="popup__errorInput popup__errorInput_id_locplace" ></span>
+          <input class="popup__info popup__info_input_link" type="url" name="loclink" id="loclink" placeholder="Ссылка на картинку" required>
+          <span class="popup__errorInput popup__errorInput_id_loclink" ></span>
+          <button class="popup__button-save popup__button-save_add" type="submit" aria-label="Кнопка Сохранить данные карточки">Сохранить</button>
         </form>
-        
       </div>
     </div>
   </div>

@@ -200,39 +200,69 @@ function closePopupEscape (event) {
 };
 
 
+const validation = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__info',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: '.popup__button_disabled',
+  inputErrorClass: 'popup__info_input_error',
+  errorClass: 'popup__errorInput_active'
+}
 
-
-// Вынесем все необходимые элементы формы в константы
-const formElement = page.querySelector('.popup__form');
-const formInput = formElement.querySelector('.popup__info');
-
- 
-
-/* задаём функции, которая добавит полю формы класс с ошибкой и которая удалит этот класс */
-const showInputError = (element) => {
-  element.classList.add('popup__info_input_error');
+/* задаём функции, которая выделит поле формы с невалидными данными и которая снимет выделение */
+const showInputError = (formElement, inputElement, errorMessage, object) => { 
+  /* получаем элемент с текстом об ошибке, визуализируем его и добавляем текст в сообщение пользователю */ 
+  const errorElement = formElement.querySelector(`.popup__errorInput_id_${inputElement.id}`);
+  errorElement.classList.add(object.errorClass);
+  errorElement.textContent = errorMessage;
+  /* выделяем поле с невалидными данными */
+  inputElement.classList.add(object.inputErrorClass);  
 };
-const hideInputError = (element) => {
-  element.classList.remove('form__input_type_error');
-};
 
-// Функция, которая проверяет валидность поля
-const isValid = () => {
-  if (!formInput.validity.valid) {
-    // Если поле не проходит валидацию, покажем ошибку
-    showInputError(formInput);
+const hideInputError = (formElement, inputElement, object) => {
+  /* получаем элемент с текстом об ошибке, скрываем его и удаляем текст в сообщении пользователю */ 
+  const errorElement = formElement.querySelector(`.popup__errorInput_id_${inputElement.id}`);
+  errorElement.classList.remove(object.errorClass);
+  errorElement.textContent = '';
+  /* снимаем выделение с поля с невалидными данными */
+  inputElement.classList.remove(object.inputErrorClass); 
+}; 
+
+/* задаём функцию, которая проверит валидность поля формы */
+const isValid = (formElement, inputElement, object) => {
+  /* сначала проверяем данные требованиями регулярных выражений */
+  if (inputElement.validity.patternMismatch) {
+    inputElement.setCustomValidity(inputElement.dataset.errorText);
   } else {
-    // Если проходит, скроем
-    hideInputError(formInput);
+    inputElement.setCustomValidity("");
   }
+
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage, object);
+  } else {
+    hideInputError(formElement, inputElement, object);
+  }
+}; 
+
+/* задаём фукцию, которая добавляет полям формы обработчик события */
+const setEventListeners = (formElement, object) => {
+  /* получаем поля формы */
+  const inputList = Array.from(formElement.querySelectorAll(object.inputSelector));
+  /* каждому полю добавляем обработчик события input и вызываем функцию, проверяющую его валидность */
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      isValid(formElement, inputElement, object)
+    });
+  });
+}; 
+
+const enableValidation = (object) => {
+  /* получаем все формы */
+  const formList = Array.from(document.querySelectorAll(object.formSelector));
+  /* для каждой формы вызываем функцию, которая добавит её полям обработчики событий */
+  formList.forEach((formElement) => {
+    setEventListeners(formElement, object);
+  });
 };
 
-// Вызовем функцию isValid на каждый ввод символа
-formInput.addEventListener('input', isValid); 
-
-/* Слушатель события input
-formInput.addEventListener('input', function (evt) {
-  // Выведем в консоль значение свойства validity.valid поля ввода, 
-  // на котором слушаем событие input
-  console.log(evt.target.validity.valid);
-});*/
+enableValidation(validation);
