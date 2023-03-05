@@ -1,47 +1,19 @@
 //import '../pages/index.css';
-import { initialCards, validation } from './constants.js';
+import { initialCards, validation, page, popupEditProfile, popupAddCard, popupPhoto, profile, profileButtonEdit, profileButtonAdd, profileUserName, profileUserProfession,
+   formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto
+   } from './constants.js';
 
 import {  openPopup, closePopup} from './modal.js';
 import { enableValidation } from './validate.js';
 //import {addCard}  from './card';
- const page = document.querySelector('.page');
-const popupEditProfile = page.querySelector('.popup_edit');
-const popupAddCard = page.querySelector('.popup_add');
-const popupPhoto = page.querySelector('.popup_photo');
+ 
 
-
-/* задаём функции, которые открывают - закрывают необходимый popup и подключают слушателей событий */ 
-
-  
-
-
-/* задаём переменные для обращения к кнопкам edit и add в профиле*/
-const profile = page.querySelector('.profile');
-const profileButtonEdit = profile.querySelector('.profile__button-edit');
-const profileButtonAdd = profile.querySelector('.profile__button-add');
-
-/* задаём переменные, для обращения к значениям имя и профессия в профиле */ 
-const profileUserName = profile.querySelector('.profile__user-name');
-const profileUserProfession = profile.querySelector('.profile__user-profession');
-
-/* задаём переменные, для обращения к форме и через неё к полям редактирования профиля */
-const formUser = document.forms.user;
-const userNameForm = formUser.elements.username;
-const userProfForm = formUser.elements.userprof;
-
- /* задаём переменные, для обращения к форме и через неё к полям добавления карточки */
- const formLocation = document.forms.location;
- const locPlaceForm = formLocation.elements.locplace;
- const locLinkForm = formLocation.elements.loclink;
 
 /* задаём переменные для обращения к кнопкам Сохранить-edit и Сохранить-add в popup*/
-const popupButtonSaveEdit = popupEditProfile.querySelector('.popup__button-save_edit');  
-const popupButtonSaveAdd = popupAddCard.querySelector('.popup__button-save_add');
+//const popupButtonSaveEdit = popupEditProfile.querySelector('.popup__button-save_edit');  
+//const popupButtonSaveAdd = popupAddCard.querySelector('.popup__button-save_add');
 
-/* задаём переменные для обращения к "крестикам" в разных popup*/
-const popupCloseButtonEdit = popupEditProfile.querySelector('.popup__close-button_edit');
-const popupCloseButtonAdd = popupAddCard.querySelector('.popup__close-button_add');
-const popupCloseButtonPhoto = popupPhoto.querySelector('.popup__close-button_photo');
+
 
 /* задаём функцию открытия popup-edit, её срабатывание при клике на кнопку edit в профиле 
 и предачу в поля формы edit текущих значений из профиля */
@@ -76,11 +48,11 @@ const popupImage = popupPhoto.querySelector('.popup__image');
 const popupInscription = popupPhoto.querySelector('.popup__inscription');
 /* переменные для формирования карточек */
 const cardElementTemplate = page.querySelector('#card-element').content; 
+
 /* функция, меняющая состояние лайка на противоположное */
-export function changeLike(cardElement) {    
+function changeLike(cardElement) {    
   cardElement.classList.toggle('element__card-like_active');
 };
-
 
 /* функция, которая удаляет карточку со страницы*/
 function deleteCard(cardElement) {    

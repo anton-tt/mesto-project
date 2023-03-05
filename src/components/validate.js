@@ -1,3 +1,7 @@
+import { initialCards, validation, page, popupEditProfile, popupAddCard, popupPhoto, profile, profileButtonEdit, profileButtonAdd, profileUserName, profileUserProfession,
+  formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto
+  } from './constants.js';
+  
   /* задаём две функции, которая выделит поле формы с невалидными данными и которая снимет выделение */
 const showInputError = (formElement, inputElement, errorMessage, object) => { 
     /* получаем элемент с текстом об ошибке, визуализируем его и добавляем текст в сообщение пользователю */ 
