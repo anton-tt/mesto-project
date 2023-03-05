@@ -1,26 +1,18 @@
 //import '../pages/index.css';
 import { initialCards, validation } from './constants.js';
 
-//import {openPopup, closePopup, closePopupClick, closePopupEscape} from './modal.js';
+import {  openPopup, closePopup} from './modal.js';
 import { enableValidation } from './validate.js';
-//import {openPopup, closePopup}  from './modal';
+//import {addCard}  from './card';
  const page = document.querySelector('.page');
 const popupEditProfile = page.querySelector('.popup_edit');
 const popupAddCard = page.querySelector('.popup_add');
 const popupPhoto = page.querySelector('.popup_photo');
 
-/* задаём функции, которые открывают - закрывают необходимый popup и подключают слушателей событий */ 
-export function openPopup(popup) { 
-  popup.classList.add('popup_opened');
-  page.addEventListener('click', closePopupClick);
-  page.addEventListener('keyup', closePopupEscape); 
-};
- export function closePopup(popup) { 
-  popup.classList.remove('popup_opened');
-  page.removeEventListener('click', closePopupClick);
-  page.removeEventListener('keyup', closePopupEscape); 
-}; 
 
+/* задаём функции, которые открывают - закрывают необходимый popup и подключают слушателей событий */ 
+
+  
 
 
 /* задаём переменные для обращения к кнопкам edit и add в профиле*/
@@ -84,11 +76,12 @@ const popupImage = popupPhoto.querySelector('.popup__image');
 const popupInscription = popupPhoto.querySelector('.popup__inscription');
 /* переменные для формирования карточек */
 const cardElementTemplate = page.querySelector('#card-element').content; 
-
 /* функция, меняющая состояние лайка на противоположное */
-function changeLike(cardElement) {    
+export function changeLike(cardElement) {    
   cardElement.classList.toggle('element__card-like_active');
 };
+
+
 /* функция, которая удаляет карточку со страницы*/
 function deleteCard(cardElement) {    
   cardElement.closest('.element').remove();
@@ -96,32 +89,29 @@ function deleteCard(cardElement) {
 
 /* функция с двумя параметрами - имя карточки и ссылка на фото, которая создаёт карточку */  
 export function createCard(titlePhoto, imagePhoto) {
-    const cardElement = cardElementTemplate.querySelector('.element').cloneNode(true);
-    const cardElementName = cardElement.querySelector('.element__card-name');
-    const cardElementImage = cardElement.querySelector('.element__card-photo');
-    const cardElementLike = cardElement.querySelector('.element__card-like');
-    const cardElementTrash = cardElement.querySelector('.element__card-trash');
-    cardElementName.textContent = titlePhoto;  
-    cardElementImage.src = imagePhoto;   
-    cardElementLike.addEventListener('click', function() {
-      changeLike(cardElementLike)
-    });
-    cardElementTrash.addEventListener('click', function() {
-      deleteCard(cardElementTrash)
-    });
-    cardElementImage.addEventListener('click', function() {
-      popupInscription.textContent = titlePhoto;
-      popupImage.src = imagePhoto;
-      popupImage.alt = "Фотография места";
-      openPopupPhoto();
-    });
-    return cardElement;
-  };
+  const cardElement = cardElementTemplate.querySelector('.element').cloneNode(true);
+  const cardElementName = cardElement.querySelector('.element__card-name');
+  const cardElementImage = cardElement.querySelector('.element__card-photo');
+  const cardElementLike = cardElement.querySelector('.element__card-like');
+  const cardElementTrash = cardElement.querySelector('.element__card-trash');
+  cardElementName.textContent = titlePhoto;  
+  cardElementImage.src = imagePhoto;   
+  cardElementLike.addEventListener('click', function() {
+    changeLike(cardElementLike)
+  });
+  cardElementTrash.addEventListener('click', function() {
+    deleteCard(cardElementTrash)
+  });
+  cardElementImage.addEventListener('click', function() {
+    popupInscription.textContent = titlePhoto;
+    popupImage.src = imagePhoto;
+    popupImage.alt = "Фотография места";
+    openPopupPhoto();
+  });
+  return cardElement;
+};
   
-  /* функция с параметром, которая берёт предыдущую функцию и добавляет карточку на страницу */
-  export function addCard(functionCreateElement) {
-    elementsCards.prepend(functionCreateElement);
-  };
+  
 
 /* создаём начальные карточки, используя элементы массива как аргументы для функции, создающей карточку,
 добавляем карточку на страницу и задаём ей доп.возможности через слушателей событий */
@@ -131,7 +121,10 @@ initialCards.forEach((item) => {
 });
 
 
-
+/* функция с параметром, которая берёт предыдущую функцию и добавляет карточку на страницу */
+export function addCard(functionCreateElement) {
+  elementsCards.prepend(functionCreateElement);
+};
 
  
 
@@ -202,19 +195,7 @@ function closePopupPhoto() {
 popupCloseButtonPhoto.addEventListener('click', closePopupPhoto);
 
 
-export function closePopupClick(event) {
-  if (event.target.classList.contains('popup_opened')) {
-    closePopup(event.target);
-  }
-};
 
-/* задаём функцию - при срабатывании клавиши Esc закрывается любой открытый popup */
-export function closePopupEscape (event) {
-  const popupOpened = page.querySelector('.popup_opened');
-  if (event.key === 'Escape') {
-    closePopup(popupOpened);
-  }
-};
 
 
 
