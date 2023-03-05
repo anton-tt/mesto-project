@@ -1,7 +1,13 @@
 import { initialCards, validation, page, popupEditProfile, popupAddCard, popupPhoto, profile, profileButtonEdit, profileButtonAdd, profileUserName, profileUserProfession,
-  formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto
-  } from './constants.js';
-  
+  formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto, elements, elementsCards, 
+  popupImage, popupInscription, cardElementTemplate } from './constants.js';
+ 
+  /*import { openPopupEdit, openPopupAdd, openPopupPhoto, changeLike, deleteCard, createCard, addCard, closePopupEdit, editInfoProfile,
+    submitEditProfileForm, closePopupAdd, submitAddCardForm, closePopupPhoto } from './index.js';*/
+
+    import {  openPopup, closePopup, openPopupPhoto, closePopupPhoto} from './modal.js';
+    import {  createCard, addCard, changeLike, deleteCard }  from './card.js';
+
   /* задаём две функции, которая выделит поле формы с невалидными данными и которая снимет выделение */
 const showInputError = (formElement, inputElement, errorMessage, object) => { 
     /* получаем элемент с текстом об ошибке, визуализируем его и добавляем текст в сообщение пользователю */ 

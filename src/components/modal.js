@@ -1,9 +1,13 @@
 import { initialCards, validation, page, popupEditProfile, popupAddCard, popupPhoto, profile, profileButtonEdit, profileButtonAdd, profileUserName, profileUserProfession,
-    formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto
-    } from './constants.js';
+  formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto, elements, elementsCards, 
+  popupImage, popupInscription, cardElementTemplate } from './constants.js';
+  import {  createCard, addCard, changeLike, deleteCard }  from './card.js';
+  /*import { openPopupEdit, openPopupAdd, openPopupPhoto, changeLike, deleteCard, createCard, addCard, closePopupEdit, editInfoProfile,
+    submitEditProfileForm, closePopupAdd, submitAddCardForm, closePopupPhoto } from './index.js';  */
   
+    /*import { changeLike, deleteCard, createCard }  from './card.js';*/
   
-  
+
   /* задаём функцию - при клике на "тёмный фон" закрывается любой открытый popup */
 export function closePopupClick(event) {
   if (event.target.classList.contains('popup_opened')) {
@@ -19,7 +23,7 @@ export function closePopupEscape (event) {
   }
 };
 
-  /* задаём функции, которые открывают - закрывают необходимый popup и подключают слушателей событий */ 
+  /* задаём функции, которые открывают - закрывают целевой popup и подключают -отключают слушателей событий на закрытие */ 
 export function openPopup(popup) { 
   popup.classList.add('popup_opened');
   page.addEventListener('click', closePopupClick);
@@ -31,3 +35,14 @@ export function closePopup(popup) {
   page.removeEventListener('click', closePopupClick);
   page.removeEventListener('keyup', closePopupEscape); 
 }; 
+
+/* задаём  функцию открытия popup-photo */
+export function openPopupPhoto() { 
+  openPopup(popupPhoto);
+};
+
+/* задаём функцию закрытия popup-photo и срабатывание при клике на крестик-photo */ 
+export function closePopupPhoto() { 
+  closePopup(popupPhoto);
+};
+popupCloseButtonPhoto.addEventListener('click', closePopupPhoto);

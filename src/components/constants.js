@@ -65,5 +65,15 @@ const popupCloseButtonEdit = popupEditProfile.querySelector('.popup__close-butto
 const popupCloseButtonAdd = popupAddCard.querySelector('.popup__close-button_add');
 const popupCloseButtonPhoto = popupPhoto.querySelector('.popup__close-button_photo');
 
+/* задаём переменную для обращения к блоку, в который внесём карточки */
+const elements = page.querySelector('.elements'); /* секция, в которой будем искать элементы */
+const elementsCards = elements.querySelector('.elements__cards');
+/* переменные для фото и подписи всплывающего окна с фотографией */
+const popupImage = popupPhoto.querySelector('.popup__image');
+const popupInscription = popupPhoto.querySelector('.popup__inscription');
+/* переменные для формирования карточек */
+const cardElementTemplate = page.querySelector('#card-element').content; 
+
 export { page, popupEditProfile, popupAddCard, popupPhoto, profile, profileButtonEdit, profileButtonAdd, profileUserName, profileUserProfession, 
-  formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto };
+  formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto, 
+  elements, elementsCards, popupImage, popupInscription, cardElementTemplate };
