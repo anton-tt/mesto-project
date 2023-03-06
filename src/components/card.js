@@ -2,8 +2,8 @@ import { initialCards, validation, page, popupEditProfile, popupAddCard, popupPh
     formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto, elements, elementsCards, 
     popupImage, popupInscription, cardElementTemplate } from './constants.js';
 
-    import { openPopupEdit, openPopupAdd/*, openPopupPhoto*/, /*changeLike, deleteCard, createCard, addCard*/ closePopupEdit, editInfoProfile,
-        submitEditProfileForm, closePopupAdd, submitAddCardForm/*, closePopupPhoto*/ } from './index.js';  
+    /*import { openPopupEdit, openPopupAdd/*, openPopupPhoto*/ /*changeLike, deleteCard, createCard, addCard*/ /*closePopupEdit, editInfoProfile,
+        submitEditProfileForm, closePopupAdd, submitAddCardForm/*, closePopupPhoto*/ /*} from 'index.js';  */
 
         import {  openPopup, closePopup, openPopupPhoto, closePopupPhoto} from './modal.js';  
 
