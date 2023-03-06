@@ -1,12 +1,4 @@
-import { initialCards, validation, page, popupEditProfile, popupAddCard, popupPhoto, profile, profileButtonEdit, profileButtonAdd, profileUserName, profileUserProfession,
-  formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto, elements, elementsCards, 
-  popupImage, popupInscription, cardElementTemplate } from './constants.js';
-  import {  createCard, addCard, changeLike, deleteCard }  from './card.js';
-  /*import { openPopupEdit, openPopupAdd, openPopupPhoto, changeLike, deleteCard, createCard, addCard, closePopupEdit, editInfoProfile,
-    submitEditProfileForm, closePopupAdd, submitAddCardForm, closePopupPhoto } from './index.js';  */
-  
-    /*import { changeLike, deleteCard, createCard }  from './card.js';*/
-  
+import { page, popupPhoto, popupCloseButtonPhoto } from './constants.js';
 
   /* задаём функцию - при клике на "тёмный фон" закрывается любой открытый popup */
 export function closePopupClick(event) {
