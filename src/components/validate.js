@@ -17,6 +17,16 @@ const hideInputError = (formElement, inputElement, object) => {
   inputElement.classList.remove(object.inputErrorClass); 
 }; 
   
+/* задаём функцию, которая снимет с полей формы выделения */
+export const hideFormError = (formElement, object) => {
+  /* получаем поля формы */
+  const inputList = Array.from(formElement.querySelectorAll(object.inputSelector));
+  /* для каждого поля вызываем функцию, еоторая скроет ошибку */
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, object);
+  });
+}; 
+
   /* задаём функцию, которая проверит наличие у формы невалидных полей (до первого true) */
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {

@@ -1,4 +1,4 @@
-import { page, popupPhoto, popupCloseButtonPhoto } from './constants.js';
+import { page, popupPhoto, popupCloseButtonPhoto, validation } from './constants.js';
 
   /* задаём функцию - при клике на "тёмный фон" закрывается любой открытый popup */
 export function closePopupClick(event) {

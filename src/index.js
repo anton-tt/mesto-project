@@ -4,7 +4,7 @@ import { initialCards, validation, page, popupEditProfile, popupAddCard, popupPh
    formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto, elements, elementsCards, 
    popupImage, popupInscription, cardElementTemplate } from './components/constants.js';
 import {  openPopup, closePopup } from './components/modal.js';
-import { enableValidation } from './components/validate.js';
+import { enableValidation, hideFormError } from './components/validate.js';
 import {  createCard, addCard }  from './components/card.js';
  
   /* задаём функцию открытия popup-edit, её срабатывание при клике на кнопку edit в профиле 
@@ -34,6 +34,7 @@ initialCards.forEach((item) => {
   /* задаём функцию закрытия popup-edit и срабатывание при клике на крестик-edit */ 
 export function closePopupEdit() { 
   closePopup(popupEditProfile);
+  hideFormError(popupEditProfile, validation);
 };
 popupCloseButtonEdit.addEventListener('click', closePopupEdit);
 
@@ -68,5 +69,5 @@ export function submitAddCardForm(event) {
 };
 formLocation.addEventListener('submit', submitAddCardForm)
 
-  /* вызываем функцию, которая отвечает за валидацию форм ТЕСТ*/
+  /* вызываем функцию, которая отвечает за валидацию форм*/
 enableValidation(validation);
