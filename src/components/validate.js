@@ -7,7 +7,17 @@ const showInputError = (formElement, inputElement, errorMessage, object) => {
   /* выделяем поле с невалидными данными */
   inputElement.classList.add(object.inputErrorClass);  
 };
+/*const showInputError = (formElement, inputElement, errorMessage, object) => { 
+   
+  //const errorElement = document.querySelector(.object.errorClass);
+  errorElement.classList.add(object.errorClass);
+  errorElement.textContent = errorMessage;
   
+  inputElement.classList.add(object.inputErrorClass);  
+};*/
+
+
+
 const hideInputError = (formElement, inputElement, object) => {
   /* получаем элемент с текстом об ошибке, скрываем его и удаляем текст в сообщении пользователю */ 
   const errorElement = formElement.querySelector(`.popup__errorInput_id_${inputElement.id}`);

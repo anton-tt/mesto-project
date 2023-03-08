@@ -8,16 +8,17 @@ export function closePopupClick(event) {
 };
   
   /* задаём функцию - при срабатывании клавиши Esc закрывается любой открытый popup */
-export function closePopupEscape (event) {
-  const popupOpened = page.querySelector('.popup_opened');
+export function closePopupEscape (event, popupOpened) {
   if (event.key === 'Escape') {
+    const popupOpened = page.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
 };
 
-  /* задаём функции, которые открывают - закрывают целевой popup и подключают -отключают слушателей событий на закрытие */ 
+  /* задаём функции, которые открывают - закрывают целевой popup и подключают - отключают слушателей событий на закрытие */ 
 export function openPopup(popup) { 
   popup.classList.add('popup_opened');
+  const popupOpened = page.querySelector('.popup_opened');
   page.addEventListener('click', closePopupClick);
   page.addEventListener('keyup', closePopupEscape); 
 };

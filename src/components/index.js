@@ -1,11 +1,11 @@
-import './pages/index.css';
+import '../pages/index.css';
 
 import { initialCards, validation, page, popupEditProfile, popupAddCard, popupPhoto, profile, profileButtonEdit, profileButtonAdd, profileUserName, profileUserProfession,
    formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto, elements, elementsCards, 
-   popupImage, popupInscription, cardElementTemplate, popupSaveButtonEdit, popupSaveButtonAdd } from './components/constants.js';
-import {  openPopup, closePopup } from './components/modal.js';
-import { enableValidation, hideFormError, disabledButtonSave } from './components/validate.js';
-import {  createCard, addCard }  from './components/card.js';
+   popupImage, popupInscription, cardElementTemplate, popupSaveButtonEdit, popupSaveButtonAdd } from './constants.js';
+import {  openPopup, closePopup } from './modal.js';
+import { enableValidation, hideFormError, disabledButtonSave } from './validate.js';
+import {  createCard, addCard }  from './card.js';
  
   /* задаём функцию открытия popup-edit, её срабатывание при клике на кнопку edit в профиле 
    и предачу в поля формы edit текущих значений из профиля */

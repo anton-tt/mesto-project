@@ -4,6 +4,7 @@
   box-sizing: border-box;
   max-width: 880px;
   width: 100%;
+  min-height: 70vh;
   flex-direction: column;
 }
 
