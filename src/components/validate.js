@@ -33,13 +33,20 @@ const hasInvalidInput = (inputList) => {
     return !inputElement.validity.valid;
   })
 }; 
-  
+
+/* задаём функцию, которая принимает DOM-элемент кнопки формы и инактивирует её */ 
+export const disabledButtonSave = (buttonElement, object) => {
+  buttonElement.disabled = true;
+  buttonElement.classList.add(object.inactiveButtonClass);
+};
+
   /* задаём функцию, которая изменяет состояние кнопки формы в зависимости от валидности её полей */
 const toggleButtonState = (inputList, buttonElement, object) => {
   /* если есть невалидное поле формы, то кнопка блокирована */
   if (hasInvalidInput(inputList)) {
-    buttonElement.disabled = true;
-    buttonElement.classList.add(object.inactiveButtonClass);
+    /*buttonElement.disabled = true;
+    buttonElement.classList.add(object.inactiveButtonClass);*/
+    disabledButtonSave(buttonElement, object);
   } else {
     buttonElement.disabled = false;
     buttonElement.classList.remove(object.inactiveButtonClass);
@@ -69,6 +76,7 @@ const setEventListeners = (formElement, object) => {
   const buttonElement = formElement.querySelector(object.submitButtonSelector);
   /* каждому полю добавляем обработчик события input и вызываем функции, проверяющую его валидность 
    и изменяющую в зависимости от этого состояние кнопки формы */
+   toggleButtonState(inputList, buttonElement, object);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       isValid(formElement, inputElement, object);

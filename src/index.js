@@ -2,25 +2,27 @@ import './pages/index.css';
 
 import { initialCards, validation, page, popupEditProfile, popupAddCard, popupPhoto, profile, profileButtonEdit, profileButtonAdd, profileUserName, profileUserProfession,
    formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto, elements, elementsCards, 
-   popupImage, popupInscription, cardElementTemplate } from './components/constants.js';
+   popupImage, popupInscription, cardElementTemplate, popupSaveButtonEdit, popupSaveButtonAdd } from './components/constants.js';
 import {  openPopup, closePopup } from './components/modal.js';
-import { enableValidation, hideFormError } from './components/validate.js';
+import { enableValidation, hideFormError, disabledButtonSave } from './components/validate.js';
 import {  createCard, addCard }  from './components/card.js';
  
   /* задаём функцию открытия popup-edit, её срабатывание при клике на кнопку edit в профиле 
    и предачу в поля формы edit текущих значений из профиля */
 export function openPopupEdit() { 
-  openPopup(popupEditProfile);
-};
-profileButtonEdit.addEventListener('click', function() { 
   userNameForm.value = profileUserName.textContent; 
   userProfForm.value = profileUserProfession.textContent;
-  openPopupEdit();  
-});
+  openPopup(popupEditProfile);
+  disabledButtonSave(popupSaveButtonEdit, validation);
+};
+profileButtonEdit.addEventListener('click', openPopupEdit);
 
   /* задаём функцию открытия popup-add и срабатывание при клике на кнопку add в профиле */
-export function openPopupAdd() { 
+export function openPopupAdd() {
+  locPlaceForm.value = ""; 
+  locLinkForm.value = "";
   openPopup(popupAddCard);
+  disabledButtonSave(popupSaveButtonAdd, validation);
 };
 profileButtonAdd.addEventListener('click', openPopupAdd);
 
@@ -50,6 +52,7 @@ export function submitEditProfileForm(event) {
   event.preventDefault();
   editInfoProfile();
   closePopupEdit();
+  
 };
 formUser.addEventListener('submit', submitEditProfileForm);
 

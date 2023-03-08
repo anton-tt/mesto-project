@@ -74,6 +74,10 @@ const popupInscription = popupPhoto.querySelector('.popup__inscription');
 /* переменные для формирования карточек */
 const cardElementTemplate = page.querySelector('#card-element').content; 
 
+/* переменные для обращения к кнопкам форм */
+const popupSaveButtonEdit = page.querySelector('.popup__button-save_edit');
+const popupSaveButtonAdd = page.querySelector('.popup__button-save_add');
+
 export { page, popupEditProfile, popupAddCard, popupPhoto, profile, profileButtonEdit, profileButtonAdd, profileUserName, profileUserProfession, 
   formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto, 
-  elements, elementsCards, popupImage, popupInscription, cardElementTemplate };
+  elements, elementsCards, popupImage, popupInscription, cardElementTemplate, popupSaveButtonEdit, popupSaveButtonAdd };
