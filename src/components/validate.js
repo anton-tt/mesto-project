@@ -1,37 +1,26 @@
-  /* задаём две функции, которая выделит поле формы с невалидными данными и которая снимет выделение */
 const showInputError = (formElement, inputElement, errorMessage, object) => { 
   /* получаем элемент с текстом об ошибке, визуализируем его и добавляем текст в сообщение пользователю */ 
-  const errorElement = formElement.querySelector(`.popup__errorInput_id_${inputElement.id}`);
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   errorElement.classList.add(object.errorClass);
   errorElement.textContent = errorMessage;
   /* выделяем поле с невалидными данными */
   inputElement.classList.add(object.inputErrorClass);  
 };
-/*const showInputError = (formElement, inputElement, errorMessage, object) => { 
-   
-  //const errorElement = document.querySelector(.object.errorClass);
-  errorElement.classList.add(object.errorClass);
-  errorElement.textContent = errorMessage;
-  
-  inputElement.classList.add(object.inputErrorClass);  
-};*/
-
-
 
 const hideInputError = (formElement, inputElement, object) => {
   /* получаем элемент с текстом об ошибке, скрываем его и удаляем текст в сообщении пользователю */ 
-  const errorElement = formElement.querySelector(`.popup__errorInput_id_${inputElement.id}`);
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   errorElement.classList.remove(object.errorClass);
   errorElement.textContent = '';
   /* снимаем выделение с поля с невалидными данными */
   inputElement.classList.remove(object.inputErrorClass); 
 }; 
-  
-/* задаём функцию, которая снимет с полей формы выделения */
+
+  /* задаём функцию, которая снимет с полей формы выделения */
 export const hideFormError = (formElement, object) => {
   /* получаем поля формы */
   const inputList = Array.from(formElement.querySelectorAll(object.inputSelector));
-  /* для каждого поля вызываем функцию, еоторая скроет ошибку */
+  /* для каждого поля вызываем функцию, которая скроет ошибку */
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement, object);
   });
@@ -54,8 +43,6 @@ export const disabledButtonSave = (buttonElement, object) => {
 const toggleButtonState = (inputList, buttonElement, object) => {
   /* если есть невалидное поле формы, то кнопка блокирована */
   if (hasInvalidInput(inputList)) {
-    /*buttonElement.disabled = true;
-    buttonElement.classList.add(object.inactiveButtonClass);*/
     disabledButtonSave(buttonElement, object);
   } else {
     buttonElement.disabled = false;

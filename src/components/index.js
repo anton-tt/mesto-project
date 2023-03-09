@@ -59,6 +59,7 @@ formUser.addEventListener('submit', submitEditProfileForm);
   /* задаём функцию закрытия popup-add и срабатывание при клике на крестик-add */  
 export function closePopupAdd() { 
   closePopup(popupAddCard);
+  hideFormError(popupAddCard, validation);
 };
 popupCloseButtonAdd.addEventListener('click', closePopupAdd);
 

@@ -10,18 +10,16 @@ export function createCard(titlePhoto, imagePhoto) {
   const cardElementTrash = cardElement.querySelector('.element__card-trash');
   cardElementName.textContent = titlePhoto;  
   cardElementImage.src = imagePhoto;   
-  cardElementLike.addEventListener('click', function() {
-    changeLike(cardElementLike)
-  });
-  cardElementTrash.addEventListener('click', function() {
-    deleteCard(cardElementTrash)
-  });
-  cardElementImage.addEventListener('click', function() {
+  cardElementLike.addEventListener('click', () => changeLike(cardElementLike));
+  cardElementTrash.addEventListener('click', () => deleteCard(cardElementTrash));
+  
+  const openPopupImage = (titlePhoto, imagePhoto) => {
     popupInscription.textContent = titlePhoto;
     popupImage.src = imagePhoto;
     popupImage.alt = "Фотография места";
     openPopupPhoto();
-  });
+  };
+  cardElementImage.addEventListener('click', () => openPopupImage(titlePhoto, imagePhoto));
   return cardElement;
 };
 
