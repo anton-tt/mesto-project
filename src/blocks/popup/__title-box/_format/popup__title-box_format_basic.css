@@ -1,0 +1,9 @@
+.popup__title-box_format_basic {
+  padding-bottom: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .popup__title-box_format_basic {
+    padding-bottom: 75px;
+  }
+}

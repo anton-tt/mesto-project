@@ -1,0 +1,12 @@
+.profile__edit-avatar {
+  visibility: hidden;
+  width: 26px; 
+  height: 26px;
+  position: absolute;
+  top: 48px;
+  right: 48px;
+  background-color: transparent;
+  background-image: url('../../../images/profile-avatar-button.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}

@@ -1,4 +1,74 @@
-export const initialCards = [
+export const validation = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__info',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_disabled',
+  inputErrorClass: 'popup__info_input_error',
+  errorClass: 'popup__errorInput_active'
+};
+
+const page = document.querySelector('.page');
+
+/* задаём переменные для обращения к необходимым popup */
+const popupEditProfile = page.querySelector('.popup_edit');
+const popupAddCard = page.querySelector('.popup_add');
+const popupPhoto = page.querySelector('.popup_photo');
+const popupEditAvatar = page.querySelector('.popup_avatar');
+
+/* задаём переменные для обращения к кнопкам edit, add и avatar в профиле*/
+const profile = page.querySelector('.profile');
+const profileButtonEdit = profile.querySelector('.profile__button-edit');
+const profileButtonAdd = profile.querySelector('.profile__button-add');
+const profileButtonAvatar = profile.querySelector('.profile__avatar');
+
+/* задаём переменные, для обращения к значениям имя, профессия и фото в профиле */ 
+const profileUserName = profile.querySelector('.profile__user-name');
+const profileUserProfession = profile.querySelector('.profile__user-profession');
+const profileUserPhoto = profile.querySelector('.profile__photo');
+
+/* задаём переменные, для обращения к форме и через неё к полям редактирования профиля */
+const formUser = document.forms.user;
+const userNameForm = formUser.elements.username;
+const userProfForm = formUser.elements.userprof;
+
+ /* задаём переменные, для обращения к форме и через неё к полям добавления карточки */
+ const formLocation = document.forms.location;
+ const locPlaceForm = formLocation.elements.locplace;
+ const locLinkForm = formLocation.elements.loclink;
+
+ /* задаём переменные, для обращения к форме и через неё к полю редактирования аватара */
+ const formAvatar = document.forms.avatar;
+ const avaLinkForm = formAvatar.elements.avalink;
+
+ /* задаём переменную для обращения к фотографии профиля */
+ const profilePhoto = profile.querySelector('.profile__photo');
+ 
+ /* задаём переменные для обращения к "крестикам" в разных popup*/
+const popupCloseButtonEdit = popupEditProfile.querySelector('.popup__close-button_edit');
+const popupCloseButtonAdd = popupAddCard.querySelector('.popup__close-button_add');
+const popupCloseButtonPhoto = popupPhoto.querySelector('.popup__close-button_photo');
+const popupCloseButtonAvatar = popupEditAvatar.querySelector('.popup__close-button_avatar');
+
+/* задаём переменную для обращения к блоку, в который внесём карточки */
+const elements = page.querySelector('.elements'); /* секция, в которой будем искать элементы */
+const elementsCards = elements.querySelector('.elements__cards');
+/* переменные для фото и подписи всплывающего окна с фотографией */
+const popupImage = popupPhoto.querySelector('.popup__image');
+const popupInscription = popupPhoto.querySelector('.popup__inscription');
+/* переменные для формирования карточек */
+const cardElementTemplate = page.querySelector('#card-element').content; 
+
+/* переменные для обращения к кнопкам форм */
+const popupSaveButtonEdit = page.querySelector('.popup__button-save_edit');
+const popupSaveButtonAdd = page.querySelector('.popup__button-save_add');
+const popupSaveButtonAvatar = page.querySelector('.popup__button-save_avatar');
+
+export { page, popupEditProfile, popupAddCard, popupPhoto, popupEditAvatar, profile, profileButtonEdit, profileButtonAdd, profileButtonAvatar, 
+  profileUserName, profileUserProfession, profileUserPhoto, formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, 
+  formAvatar, avaLinkForm, profilePhoto, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto, popupCloseButtonAvatar, elements, 
+  elementsCards, popupImage, popupInscription, cardElementTemplate, popupSaveButtonEdit, popupSaveButtonAdd, popupSaveButtonAvatar };
+
+  /*export const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -23,61 +93,4 @@ export const initialCards = [
     name: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
-];
-
-export const validation = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__info',
-  submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button-save_disabled',
-  inputErrorClass: 'popup__info_input_error',
-  errorClass: 'popup__errorInput_active'
-};
-
-const page = document.querySelector('.page');
-
-/* задаём переменные для обращения к необходимым popup */
-const popupEditProfile = page.querySelector('.popup_edit');
-const popupAddCard = page.querySelector('.popup_add');
-const popupPhoto = page.querySelector('.popup_photo');
-
-/* задаём переменные для обращения к кнопкам edit и add в профиле*/
-const profile = page.querySelector('.profile');
-const profileButtonEdit = profile.querySelector('.profile__button-edit');
-const profileButtonAdd = profile.querySelector('.profile__button-add');
-
-/* задаём переменные, для обращения к значениям имя и профессия в профиле */ 
-const profileUserName = profile.querySelector('.profile__user-name');
-const profileUserProfession = profile.querySelector('.profile__user-profession');
-
-/* задаём переменные, для обращения к форме и через неё к полям редактирования профиля */
-const formUser = document.forms.user;
-const userNameForm = formUser.elements.username;
-const userProfForm = formUser.elements.userprof;
-
- /* задаём переменные, для обращения к форме и через неё к полям добавления карточки */
- const formLocation = document.forms.location;
- const locPlaceForm = formLocation.elements.locplace;
- const locLinkForm = formLocation.elements.loclink;
- 
- /* задаём переменные для обращения к "крестикам" в разных popup*/
-const popupCloseButtonEdit = popupEditProfile.querySelector('.popup__close-button_edit');
-const popupCloseButtonAdd = popupAddCard.querySelector('.popup__close-button_add');
-const popupCloseButtonPhoto = popupPhoto.querySelector('.popup__close-button_photo');
-
-/* задаём переменную для обращения к блоку, в который внесём карточки */
-const elements = page.querySelector('.elements'); /* секция, в которой будем искать элементы */
-const elementsCards = elements.querySelector('.elements__cards');
-/* переменные для фото и подписи всплывающего окна с фотографией */
-const popupImage = popupPhoto.querySelector('.popup__image');
-const popupInscription = popupPhoto.querySelector('.popup__inscription');
-/* переменные для формирования карточек */
-const cardElementTemplate = page.querySelector('#card-element').content; 
-
-/* переменные для обращения к кнопкам форм */
-const popupSaveButtonEdit = page.querySelector('.popup__button-save_edit');
-const popupSaveButtonAdd = page.querySelector('.popup__button-save_add');
-
-export { page, popupEditProfile, popupAddCard, popupPhoto, profile, profileButtonEdit, profileButtonAdd, profileUserName, profileUserProfession, 
-  formUser, userNameForm, userProfForm, formLocation, locPlaceForm, locLinkForm, popupCloseButtonEdit, popupCloseButtonAdd, popupCloseButtonPhoto, 
-  elements, elementsCards, popupImage, popupInscription, cardElementTemplate, popupSaveButtonEdit, popupSaveButtonAdd };
+];*/
