@@ -27,7 +27,7 @@ export function getCards() {
     }).then(chekResponse);
 }
 
-export function editProfileServer(userName, userAbout) { //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+export function editProfileServer(userName, userAbout) {
     return fetch(`${apiId.urlBase}users/me`, {
         method: 'PATCH',
         headers: apiId.headers,
