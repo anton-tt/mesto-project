@@ -51,7 +51,10 @@ Promise.all(promises)
     cardsInfo.forEach((item) => {
       const createCardBasis = createCard(item, user); 
       addCard(createCardBasis);     
-    });
+    })
+  .catch((err) => {
+      console.log(err);
+    })  
   }); 
   
   /* задаём функцию закрытия popup-edit и срабатывание при клике на крестик-edit */ 
@@ -67,9 +70,9 @@ export function submitEditProfileForm(event) {
   event.preventDefault();
   popupSaveButtonEdit.textContent = "Сохранение...";
   editProfileServer(userNameForm.value, userProfForm.value)
-    .then(() => {
-      profileUserName.textContent = userNameForm.value;
-      profileUserProfession.textContent = userProfForm.value;
+    .then((user) => {
+      profileUserName.textContent = user.name;
+      profileUserProfession.textContent = user.about;
       closePopupEdit();
     })
     .catch((err) => {
@@ -121,8 +124,8 @@ export function submitChangeAvatarForm(event) {
   event.preventDefault();
   popupSaveButtonAvatar.textContent = "Сохранение...";
   editAvatarProfile(avaLinkForm.value)
-  .then(() => {
-    profilePhoto.src = avaLinkForm.value;
+  .then((user) => {
+    profilePhoto.src = user.avatar;
     closePopupAvatar();
   })
   .catch((err) => {

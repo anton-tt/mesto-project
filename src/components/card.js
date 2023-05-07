@@ -27,7 +27,7 @@ export function createCard(dataCard, dataUser) {
       cardElementLike.classList.add('element__card-like_active');
     }
   });
-  cardElementLike.addEventListener('click', () => changeLike(cardId, cardElementLike, cardElementNumber, cardLikesNumber));
+  cardElementLike.addEventListener('click', () => changeLike(cardId, cardElementLike, cardElementNumber));
   
   if (cardAddUserId === userId) {
     cardElementTrash.classList.add('element__card-trash_active');
@@ -61,22 +61,22 @@ export function deleteCard(id, cardElement) {
 };
 
   /* функция, обеспечивающая выставление / удаление лайка */
-export function changeLike(id, cardElement, cardElementNumber, cardLikesNumber) {   
+export function changeLike(id, cardElement, cardElementNumber) {   
   const like = cardElement.classList.contains('element__card-like_active');
   if (!like) {
     addCardLike(id)
-      .then(() => {
+      .then((data) => {
         cardElement.classList.add('element__card-like_active');
-        cardElementNumber.textContent = cardLikesNumber;
+        cardElementNumber.textContent = data.likes.length;
       })
       .catch((err) => {
         console.log(err);
       })  
   } else {
     deleteCardLike(id)
-      .then(() => {
+      .then((data) => {
         cardElement.classList.remove('element__card-like_active');
-        cardElementNumber.textContent = cardLikesNumber;
+        cardElementNumber.textContent = data.likes.length;
       })
       .catch((err) => {
         console.log(err);

@@ -17,23 +17,17 @@ export function getUserInfo() {
     return fetch(`${apiId.urlBase}users/me`, {
         method: 'GET',
         headers: apiId.headers
-    }).then(chekResponse)
-    .catch((err) => {
-        console.log(err);
-    });
+    }).then(chekResponse);
 }
 
 export function getCards() {
     return fetch(`${apiId.urlBase}cards`, {
         method: 'GET',
         headers: apiId.headers
-    }).then(chekResponse)
-    .catch((err) => {
-        console.log(err);
-    });
+    }).then(chekResponse);
 }
 
-export function editProfileServer(userName, userAbout) {
+export function editProfileServer(userName, userAbout) { //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     return fetch(`${apiId.urlBase}users/me`, {
         method: 'PATCH',
         headers: apiId.headers,
@@ -41,10 +35,7 @@ export function editProfileServer(userName, userAbout) {
             name: userName,
             about: userAbout
         })    
-    }).then(chekResponse)
-    .catch((err) => {
-        console.log(err);
-    });
+    }).then(chekResponse);
 }
 
 export function addNewCard(cardName, cardLink) {
@@ -55,40 +46,28 @@ export function addNewCard(cardName, cardLink) {
             name: cardName,
             link: cardLink
         })    
-    }).then(chekResponse)
-    .catch((err) => {
-        console.log(err);
-    });
+    }).then(chekResponse);
 }
 
 export function deleteCardServer(cardId) {
     return fetch(`${apiId.urlBase}cards/${cardId}`, {
         method: 'DELETE',
         headers: apiId.headers    
-    }).then(chekResponse)
-    .catch((err) => {
-        console.log(err);
-    });
+    }).then(chekResponse);
 }
 
 export function addCardLike(cardId) {
     return fetch(`${apiId.urlBase}cards/likes/${cardId}`, {
         method: 'PUT',
         headers: apiId.headers
-    }).then(chekResponse)
-    .catch((err) => {
-        console.log(err);
-    });
+    }).then(chekResponse);
 }
 
 export function deleteCardLike(cardId) {
     return fetch(`${apiId.urlBase}cards/likes/${cardId}`, {
         method: 'DELETE',
         headers: apiId.headers    
-    }).then(chekResponse)
-    .catch((err) => {
-        console.log(err);
-    });
+    }).then(chekResponse);
 }
 
 export function editAvatarProfile(userAvatar) {
@@ -98,8 +77,5 @@ export function editAvatarProfile(userAvatar) {
         body: JSON.stringify({
             avatar: userAvatar
         })    
-    }).then(chekResponse)
-    .catch((err) => {
-        console.log(err);
-    });
+    }).then(chekResponse);
 }
