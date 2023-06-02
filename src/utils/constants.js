@@ -21,20 +21,18 @@ export const userSelectors = {
   selectorAvatar: '.profile__photo'
 }
 
-
 export const page = document.querySelector('.page');
 
-/* задаём переменные для обращения к кнопкам edit, add и avatar в профиле*/
+  /* задаём переменные для обращения к кнопкам edit, add и avatar в профиле*/
 const profile = page.querySelector('.profile');
 export const profileButtonEdit = profile.querySelector('.profile__button-edit');
 export const profileButtonAdd = profile.querySelector('.profile__button-add');
 export const profileButtonAvatar = profile.querySelector('.profile__avatar');
   
-/* переменные для обращения к кнопкам форм */
+  /* переменные для обращения к кнопкам форм */
 export const popupSaveButtonEdit = page.querySelector('.popup__button-save_edit');
 export const popupSaveButtonAdd = page.querySelector('.popup__button-save_add');
 export const popupSaveButtonAvatar = page.querySelector('.popup__button-save_avatar');
-
 
 /* задаём переменные для обращения к необходимым popup */
 /*const popupEditProfile = page.querySelector('.popup_edit');

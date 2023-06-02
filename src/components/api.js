@@ -1,10 +1,3 @@
-/*const apiId = {
-    urlBase: 'https://nomoreparties.co/v1/plus-cohort-23/',
-    headers: {
-        authorization: 'e1af8fdb-dc43-4ad1-80c1-f523f688a620',
-        'Content-Type': 'application/json'
-    }
-}*/
 export default class Api {
 
   constructor(options) { 

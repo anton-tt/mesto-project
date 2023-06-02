@@ -19,7 +19,7 @@ export default class Section {
       this.addItem(card);    
     })
   }
-
+    // метод, который отвечает за отрисовку добавленной карточки
   pictureItem(item, user) {
       const card = this._renderer(item, user); 
       this.addItem(card);    

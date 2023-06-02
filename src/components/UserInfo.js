@@ -15,7 +15,7 @@ export default class UserInfo {
     }
   }
 
-    // метод, который принимает новые данные пользователя, gполученные от сервера, и добавляет их на страницу
+    // метод, который принимает новые данные пользователя, полученные от сервера, и добавляет их на страницу
   setUserInfo = (data) => {
     this._userName.textContent = data.name;
     this._userProfession.textContent = data.about;
