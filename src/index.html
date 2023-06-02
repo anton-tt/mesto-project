@@ -46,9 +46,9 @@
       <div class="popup__box popup__box_format_basic">
         <h3 class="popup__title-box popup__title-box_format_basic">Редактировать профиль</h3>
         <form class="popup__form" type="submit" id="user" name="user" novalidate>
-          <input class="popup__info popup__info_input_name" type="text" name="username" id="popup__username" placeholder="Имя пользователя" required minlength="2" maxlength="40" pattern="^[a-zA-Zа-яёА-ЯЁ\s_-]+$"  data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы">
+          <input class="popup__info popup__info_input_name" type="text" name="name" id="popup__username" placeholder="Имя пользователя" required minlength="2" maxlength="40" pattern="^[a-zA-Zа-яёА-ЯЁ\s_-]+$"  data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы">
           <span class="popup__errorInput popup__username-error"></span>
-          <input class="popup__info popup__info_input_profession" type="text"  name="userprof" id="popup__userprof" placeholder="Профессия" required minlength="2" maxlength="200" pattern="^[a-zA-Zа-яёА-ЯЁ\s_-]+$" data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы"> 
+          <input class="popup__info popup__info_input_profession" type="text"  name="about" id="popup__userprof" placeholder="Профессия" required minlength="2" maxlength="200" pattern="^[a-zA-Zа-яёА-ЯЁ\s_-]+$" data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы"> 
           <span class="popup__errorInput popup__userprof-error"></span>
           <button class="popup__button-save popup__button-save_edit" type="submit" aria-label="Кнопка Сохранить данные карточки">Сохранить</button>
         </form>
@@ -63,9 +63,9 @@
       <div class="popup__box popup__box_format_basic">
         <h3 class="popup__title-box popup__title-box_format_basic">Новая карточка</h3>
         <form class="popup__form" type="submit" id="location" name="location" novalidate> 
-          <input class="popup__info popup__info_input_place" type="text" name="locplace" id="popup__locplace" placeholder="Название" required minlength="2" maxlength="30" pattern="^[a-zA-Zа-яёА-ЯЁ\s_-]+$"   data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы">
+          <input class="popup__info popup__info_input_place" type="text" name="name" id="popup__locplace" placeholder="Название" required minlength="2" maxlength="30" pattern="^[a-zA-Zа-яёА-ЯЁ\s_-]+$"   data-error-text="Поле может содержать латинские и кириллические символы, знаки дефиса, пробелы">
           <span class="popup__errorInput popup__locplace-error"></span>
-          <input class="popup__info popup__info_input_link" type="url" name="loclink" id="popup__loclink" placeholder="Ссылка на картинку" required>
+          <input class="popup__info popup__info_input_link" type="url" name="link" id="popup__loclink" placeholder="Ссылка на картинку" required>
           <span class="popup__errorInput popup__loclink-error"></span>
           <button class="popup__button-save popup__button-save_add" type="submit" aria-label="Кнопка Сохранить данные карточки">Сохранить</button>
         </form>
@@ -88,8 +88,8 @@
       <button class="popup__close-button popup__close-button_avatar" type="button" aria-label="Кнопка Закрыть всплывающее окно"></button>
       <div class="popup__box popup__box_format_small">
         <h3 class="popup__title-box">Обновить аватар</h3>
-        <form class="popup__form" type="submit" id="avatar" name="avatar" novalidate> 
-          <input class="popup__info popup__info_input_avatar" type="url" name="avalink" id="popup__avalink" placeholder="Ссылка на аватар" required>
+        <form class="popup__form" type="submit" id="avatar" name="avatara" novalidate> 
+          <input class="popup__info popup__info_input_avatar" type="url" name="avatar" id="popup__avalink" placeholder="Ссылка на аватар" required>
           <span class="popup__errorInput popup__avalink-error"></span>
           <button class="popup__button-save popup__button-save_avatar" type="submit" aria-label="Кнопка Сохранить изменённый аватар">Сохранить</button>
         </form>
@@ -97,7 +97,7 @@
     </div>
   </div>
 
-  <template id="card-element">
+  <template class="card-template card-template_type_default" id="card-element">
     <li class="element">
       <img class="element__card-photo" alt="Фотография Места">
       <div class="element__card-inscription">
