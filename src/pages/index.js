@@ -12,16 +12,64 @@ import { apiId, userSelectors, validation, profileButtonEdit, profileButtonAdd, 
 const api = new Api(apiId);
 
 const userInfo = new UserInfo(userSelectors);
+  
+  // запускаем валидацию для трёх попапов
+const formEditProfileValidator = new FormValidator(validation, document.forms.user);
+formEditProfileValidator.enableValidation();
+const formAddCardValidator = new FormValidator(validation, document.forms.location);
+formAddCardValidator.enableValidation();
+const formEditAvatarValidator = new FormValidator(validation, document.forms.avatar);
+formEditAvatarValidator.enableValidation();
 
 let user = {};
-const section = new Section((dataCard, dataUser) => {return createCard (dataCard, dataUser);}, '.elements__cards');
+
+const section = new Section((dataCard, userId) => {return createCard (dataCard, userId);}, '.elements__cards');
 const popupWithImage = new PopupWithImage('.popup_photo');    
+  
+  // функция, обеспечивающая раскрытие попапа
 const handleCardClick = (cardPhoto, cardTitle) => {
   popupWithImage.open(cardPhoto, cardTitle);
 }
 
-const createCard = (dataCard, dataUser) => {
-  const cardNew = new Card(dataCard, dataUser, api, '.card-template_type_default', handleCardClick);
+  // функция, которая отправляет запрос на сервер на удаление карточки и запускает в работу ответ
+function deleteCardServer (cardElement, cardId, cardClass) {
+  api.deleteCardServer(cardId)
+  .then(() => {
+    cardClass.deleteCard(cardElement)
+  })
+  .catch((err) => {
+    console.log(err);
+  })   
+};
+
+  // функция, которая отправляет запрос на сервер на постановку / удаление лайка и запускает в работу ответ
+function changeLikeServer(cardElement, cardId, cardClass) {   
+  if (!cardClass.isLike(cardElement)) {
+    api.addCardLike(cardId)
+      .then((data) => {
+        cardClass.changeLike(cardElement, data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })  
+  } else {
+    api.deleteCardLike(cardId)
+      .then((data) => {
+        cardClass.changeLike(cardElement, data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })  
+  }
+};
+
+const createCard = (dataCard, userId) => {
+  const cardNew = new Card(dataCard, 
+                           userId, 
+                           '.card-template_type_default', 
+                           handleCardClick, 
+                           (cardElement, cardId) => { deleteCardServer(cardElement, cardId, cardNew) },
+                           (cardElement, cardId) => { changeLikeServer(cardElement, cardId, cardNew)} );
   return cardNew.generate();
 }
 
@@ -31,17 +79,23 @@ Promise.all(promises)
   .then(([userData, cardsData]) => {
     user = userData;    
     userInfo.setUserInfo(user);
-    section.pictureAllItems(cardsData, user);
+    section.drawAllItems(cardsData, user._id);
   })
   .catch((err) => {
       console.log(err);
   });   
-
-  // организуем работу попапа редактирования профиля
+  
+  // организуем работу попапа редактирования профиля   
 const popupEditProfile = new PopupWithForm('.popup_edit', (valuesForm) => { submitEditProfileForm(valuesForm) });
-const formEditProfileValidator = new FormValidator(validation, document.forms.user);
-formEditProfileValidator.enableValidation();
-function submitEditProfileForm(valuesForm) {
+
+profileButtonEdit.addEventListener('click', (event) => {
+  popupEditProfile.open();
+  popupEditProfile.setInputValues(userInfo.getUserInfo());
+  formEditProfileValidator.hideFormError();
+  formEditProfileValidator.disabledButtonSave(popupSaveButtonEdit);
+});
+
+const submitEditProfileForm = (valuesForm) => {
   popupEditProfile.setTitleButtonSave("Сохранение...");
   api.editProfileServer(valuesForm)
     .then((dataUser) => {
@@ -56,22 +110,22 @@ function submitEditProfileForm(valuesForm) {
       popupEditProfile.setTitleButtonSave("Сохранить");
     });
 }
-profileButtonEdit.addEventListener('click', (event) => {
-  popupEditProfile.open();
-  popupEditProfile.setInputValues(userInfo.getUserInfo());
-  formEditProfileValidator.hideFormError();
-  formEditProfileValidator.disabledButtonSave(popupSaveButtonEdit);
-});
+
 
   // организуем работу попапа добавления карточки
 const popupAddCard = new PopupWithForm('.popup_add', (valuesForm) => { submitAddCardForm(valuesForm) });
-const formAddCardValidator = new FormValidator(validation, document.forms.location);
-formAddCardValidator.enableValidation();
-function submitAddCardForm (valuesForm) {
+
+profileButtonAdd.addEventListener('click', (event) => {
+  popupAddCard.open();
+  formAddCardValidator.hideFormError();
+  formAddCardValidator.disabledButtonSave(popupSaveButtonAdd);
+});
+
+const submitAddCardForm = (valuesForm) => {
   popupAddCard.setTitleButtonSave("Сохранение...");
   api.addNewCard(valuesForm)
     .then((dataCard) => {  
-      section.pictureItem(dataCard, user);
+      section.drawItem(dataCard, user._id);
       popupAddCard.close();
     })
     .catch((err) => {
@@ -81,17 +135,17 @@ function submitAddCardForm (valuesForm) {
       popupAddCard.setTitleButtonSave("Сохранить");
     }); 
 }
-profileButtonAdd.addEventListener('click', (event) => {
-  popupAddCard.open();
-  formAddCardValidator.hideFormError();
-  formAddCardValidator.disabledButtonSave(popupSaveButtonAdd);
-});
 
   // организуем работу попапа редактирования аватарки
 const popupEditAvatar = new PopupWithForm('.popup_avatar', (valuesForm) => { submitEditAvatarForm(valuesForm) });
-const formEditAvatarValidator = new FormValidator(validation, document.forms.avatar);
-formEditAvatarValidator.enableValidation();
-function submitEditAvatarForm(valuesForm) {
+
+profileButtonAvatar.addEventListener('click', (event) => {
+  popupEditAvatar.open();
+  formEditAvatarValidator.hideFormError();
+  formEditAvatarValidator.disabledButtonSave(popupSaveButtonAvatar);
+});
+
+const submitEditAvatarForm = (valuesForm) => {
   popupEditAvatar.setTitleButtonSave("Сохранение...");
   api.editAvatarProfile(valuesForm)
     .then((dataUser) => {
@@ -104,9 +158,5 @@ function submitEditAvatarForm(valuesForm) {
     .finally(() => {
       popupEditAvatar.setTitleButtonSave("Сохранить");
     }); 
+
 }
-profileButtonAvatar.addEventListener('click', (event) => {
-  popupEditAvatar.open();
-  formEditAvatarValidator.hideFormError();
-  formEditAvatarValidator.disabledButtonSave(popupSaveButtonAvatar);
-});

@@ -5,6 +5,7 @@ export default class UserInfo {
     this._userProfession = document.querySelector(userData.selectorProfession);
     this._userAvatar = document.querySelector(userData.selectorAvatar);
   }
+  
     // метод, который возвращает объект с данными пользователя (перед этим их получили от методов класса Api) 
   getUserInfo() {
     console.log();

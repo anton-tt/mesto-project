@@ -5,6 +5,9 @@ export default class FormValidator {
   constructor (validation, formElement) { 
     this._validation = validation;
     this._formElement = formElement;
+    /* получаем поля формы, кнопку "Сохранить" */
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._validation.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._validation.submitButtonSelector);
   }
 
   _showInputError = (inputElement, errorMessage) => { 
@@ -78,20 +81,18 @@ export default class FormValidator {
   
     /* задаём фукцию, которая добавляет полям формы обработчик события */
   _setEventListeners = () => {
-    /* получаем поля формы */
-    const inputList = Array.from(this._formElement.querySelectorAll(this._validation.inputSelector));
-    const buttonElement = this._formElement.querySelector(this._validation.submitButtonSelector);
-    /* каждому полю добавляем обработчик события input и вызываем функции, проверяющую его валидность 
-     и изменяющую в зависимости от этого состояние кнопки формы */
-     this._toggleButtonState(inputList, buttonElement);
-    inputList.forEach((inputElement) => {
+      /* каждому полю добавляем обработчик события input и вызываем функции, проверяющую его валидность 
+      и изменяющую в зависимости от этого состояние кнопки формы */
+    this._toggleButtonState(this._inputList, this._buttonElement);
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState(this._inputList, this._buttonElement);
       });
     });
   }; 
-  
+
+ 
   enableValidation = () => {
     this._setEventListeners(); 
   }

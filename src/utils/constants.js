@@ -34,6 +34,10 @@ export const popupSaveButtonEdit = page.querySelector('.popup__button-save_edit'
 export const popupSaveButtonAdd = page.querySelector('.popup__button-save_add');
 export const popupSaveButtonAvatar = page.querySelector('.popup__button-save_avatar');
 
+
+
+
+
 /* задаём переменные для обращения к необходимым popup */
 /*const popupEditProfile = page.querySelector('.popup_edit');
 const popupAddCard = page.querySelector('.popup_add');

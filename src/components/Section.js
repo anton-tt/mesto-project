@@ -13,16 +13,16 @@ export default class Section {
   }
     
     // метод, который отвечает за отрисовку всех элементов
-  pictureAllItems(items, user) {
+  drawAllItems(items, userId) {
     items.forEach((item) => {
-      const card = this._renderer(item, user); 
+      const card = this._renderer(item, userId); 
       this.addItem(card);    
     })
   }
     // метод, который отвечает за отрисовку добавленной карточки
-  pictureItem(item, user) {
-      const card = this._renderer(item, user); 
-      this.addItem(card);    
+  drawItem(item, userId) {
+    const card = this._renderer(item, userId); 
+    this.addItem(card);    
   }
  
 }
