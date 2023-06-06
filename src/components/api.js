@@ -1,81 +1,82 @@
-const apiId = {
-    urlBase: 'https://nomoreparties.co/v1/plus-cohort-23/',
-    headers: {
-        authorization: 'e1af8fdb-dc43-4ad1-80c1-f523f688a620',
-        'Content-Type': 'application/json'
-    }
-}
+export default class Api {
 
-const chekResponse = (res) => {
+  constructor(options) { 
+    this._urlBase = options.urlBase;
+    this._headers = options.headers;
+  }
+
+  _chekResponse = (res) => {
     if (res.ok) {
-        return res.json();
+      return res.json();
     }
     return Promise.reject(`Ошибка: ${res.status}`);
-}
+  }
 
-export function getUserInfo() {
-    return fetch(`${apiId.urlBase}users/me`, {
-        method: 'GET',
-        headers: apiId.headers
-    }).then(chekResponse);
-}
+  getUserInfo() {
+    return fetch(`${this._urlBase}users/me`, {
+      method: 'GET',
+      headers: this._headers
+    }).then(this._chekResponse);
+  }
 
-export function getCards() {
-    return fetch(`${apiId.urlBase}cards`, {
-        method: 'GET',
-        headers: apiId.headers
-    }).then(chekResponse);
-}
+  getCards() {
+    return fetch(`${this._urlBase}cards`, {
+      method: 'GET',
+      headers: this._headers
+    }).then(this._chekResponse);
+  }
 
-export function editProfileServer(userName, userAbout) {
-    return fetch(`${apiId.urlBase}users/me`, {
-        method: 'PATCH',
-        headers: apiId.headers,
-        body: JSON.stringify({
-            name: userName,
-            about: userAbout
+  editProfileServer(user) {
+    return fetch(`${this._urlBase}users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: user.name,
+        about: user.about
+      })    
+    }).then(this._chekResponse);
+  }
+
+  addNewCard(card) {
+    return fetch(`${this._urlBase}cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: card.name,
+        link: card.link
         })    
-    }).then(chekResponse);
-}
+    }).then(this._chekResponse);
+  }
 
-export function addNewCard(cardName, cardLink) {
-    return fetch(`${apiId.urlBase}cards`, {
-        method: 'POST',
-        headers: apiId.headers,
-        body: JSON.stringify({
-            name: cardName,
-            link: cardLink
-        })    
-    }).then(chekResponse);
-}
+  deleteCardServer(cardId) {
+    return fetch(`${this._urlBase}cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers    
+    }).then(this._chekResponse);
+  }
 
-export function deleteCardServer(cardId) {
-    return fetch(`${apiId.urlBase}cards/${cardId}`, {
-        method: 'DELETE',
-        headers: apiId.headers    
-    }).then(chekResponse);
-}
+  addCardLike(cardId) {
+    return fetch(`${this._urlBase}cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers
+    }).then(this._chekResponse);
+  }
 
-export function addCardLike(cardId) {
-    return fetch(`${apiId.urlBase}cards/likes/${cardId}`, {
-        method: 'PUT',
-        headers: apiId.headers
-    }).then(chekResponse);
-}
+  deleteCardLike(cardId) {
+    return fetch(`${this._urlBase}cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers    
+    }).then(this._chekResponse);
+  }
 
-export function deleteCardLike(cardId) {
-    return fetch(`${apiId.urlBase}cards/likes/${cardId}`, {
-        method: 'DELETE',
-        headers: apiId.headers    
-    }).then(chekResponse);
-}
+  editAvatarProfile(user) {
+    return fetch(`${this._urlBase}users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: user.avatar
+      })    
+    }).then(this._chekResponse);
+  }
 
-export function editAvatarProfile(userAvatar) {
-    return fetch(`${apiId.urlBase}users/me/avatar`, {
-        method: 'PATCH',
-        headers: apiId.headers,
-        body: JSON.stringify({
-            avatar: userAvatar
-        })    
-    }).then(chekResponse);
 }
