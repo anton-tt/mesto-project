@@ -8,21 +8,25 @@ export default class Section {
   }
   
     // метод, который принимает DOM-элемент и добавляет его в контейнер
-  addItem(card) {
+    addOneItem(card) {
     this._container.prepend(card);
   }
-    
+  
+  addArrItem(card) {
+    this._container.append(card);
+  }
+
     // метод, который отвечает за отрисовку всех элементов
   drawAllItems(items, userId) {
     items.forEach((item) => {
       const card = this._renderer(item, userId); 
-      this.addItem(card);    
+      this.addArrItem(card);    
     })
   }
     // метод, который отвечает за отрисовку добавленной карточки
   drawItem(item, userId) {
     const card = this._renderer(item, userId); 
-    this.addItem(card);    
+    this.addOneItem(card);    
   }
  
 }

@@ -30,36 +30,34 @@ export default class FormValidator {
 
     /* задаём функцию, которая снимет с полей формы выделения */
   hideFormError = () => {
-    /* получаем поля формы */
-    const inputList = Array.from(this._formElement.querySelectorAll(this._validation.inputSelector));
     /* для каждого поля вызываем функцию, которая скроет ошибку */
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
       console.log(inputElement);
     });
   }; 
 
     /* задаём функцию, которая проверит наличие у формы невалидных полей (до первого true) */
-  _hasInvalidInput = (inputList) => {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput = () => {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   }; 
 
     /* задаём функцию, которая принимает DOM-элемент кнопки формы и инактивирует её */ 
-  disabledButtonSave = (buttonElement) => {
-    buttonElement.disabled = true;
-    buttonElement.classList.add(this._validation.inactiveButtonClass);
+  disabledButtonSave = () => {
+    this._buttonElement.disabled = true;
+    this._buttonElement.classList.add(this._validation.inactiveButtonClass);
   };
 
     /* задаём функцию, которая изменяет состояние кнопки формы в зависимости от валидности её полей */
-  _toggleButtonState = (inputList, buttonElement) => {
+  _toggleButtonState = () => {
     /* если есть невалидное поле формы, то кнопка блокирована */
-    if (this._hasInvalidInput(inputList)) {
-      this.disabledButtonSave(buttonElement);
+    if (this._hasInvalidInput()) {
+      this.disabledButtonSave();
     } else {
-      buttonElement.disabled = false;
-      buttonElement.classList.remove(this._validation.inactiveButtonClass);
+      this._buttonElement.disabled = false;
+      this._buttonElement.classList.remove(this._validation.inactiveButtonClass);
     }
   }; 
   
@@ -83,16 +81,15 @@ export default class FormValidator {
   _setEventListeners = () => {
       /* каждому полю добавляем обработчик события input и вызываем функции, проверяющую его валидность 
       и изменяющую в зависимости от этого состояние кнопки формы */
-    this._toggleButtonState(this._inputList, this._buttonElement);
+    this._toggleButtonState();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
-        this._toggleButtonState(this._inputList, this._buttonElement);
+        this._toggleButtonState();
       });
     });
   }; 
 
- 
   enableValidation = () => {
     this._setEventListeners(); 
   }

@@ -29,14 +29,19 @@ export const profileButtonEdit = profile.querySelector('.profile__button-edit');
 export const profileButtonAdd = profile.querySelector('.profile__button-add');
 export const profileButtonAvatar = profile.querySelector('.profile__avatar');
   
-  /* переменные для обращения к кнопкам форм */
-export const popupSaveButtonEdit = page.querySelector('.popup__button-save_edit');
+
+
+
+
+
+
+
+
+
+/* переменные для обращения к кнопкам форм */
+/*export const popupSaveButtonEdit = page.querySelector('.popup__button-save_edit');
 export const popupSaveButtonAdd = page.querySelector('.popup__button-save_add');
-export const popupSaveButtonAvatar = page.querySelector('.popup__button-save_avatar');
-
-
-
-
+export const popupSaveButtonAvatar = page.querySelector('.popup__button-save_avatar');*/
 
 /* задаём переменные для обращения к необходимым popup */
 /*const popupEditProfile = page.querySelector('.popup_edit');

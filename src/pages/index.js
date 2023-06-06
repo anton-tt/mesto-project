@@ -6,8 +6,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js';
-import { apiId, userSelectors, validation, profileButtonEdit, profileButtonAdd, profileButtonAvatar, 
-  popupSaveButtonEdit, popupSaveButtonAdd, popupSaveButtonAvatar } from '../utils/constants.js';
+import { apiId, userSelectors, validation, profileButtonEdit, profileButtonAdd, profileButtonAvatar } from '../utils/constants.js';
 
 const api = new Api(apiId);
 
@@ -32,10 +31,10 @@ const handleCardClick = (cardPhoto, cardTitle) => {
 }
 
   // функция, которая отправляет запрос на сервер на удаление карточки и запускает в работу ответ
-function deleteCardServer (cardElement, cardId, cardClass) {
+function deleteCardServer (cardId, cardClass) {
   api.deleteCardServer(cardId)
   .then(() => {
-    cardClass.deleteCard(cardElement)
+    cardClass.deleteCard();
   })
   .catch((err) => {
     console.log(err);
@@ -43,11 +42,11 @@ function deleteCardServer (cardElement, cardId, cardClass) {
 };
 
   // функция, которая отправляет запрос на сервер на постановку / удаление лайка и запускает в работу ответ
-function changeLikeServer(cardElement, cardId, cardClass) {   
-  if (!cardClass.isLike(cardElement)) {
+function changeLikeServer(cardId, cardClass) {   
+  if (!cardClass.isLike()) {
     api.addCardLike(cardId)
       .then((data) => {
-        cardClass.changeLike(cardElement, data);
+        cardClass.changeLike(data);
       })
       .catch((err) => {
         console.log(err);
@@ -55,7 +54,7 @@ function changeLikeServer(cardElement, cardId, cardClass) {
   } else {
     api.deleteCardLike(cardId)
       .then((data) => {
-        cardClass.changeLike(cardElement, data);
+        cardClass.changeLike(data);
       })
       .catch((err) => {
         console.log(err);
@@ -68,8 +67,8 @@ const createCard = (dataCard, userId) => {
                            userId, 
                            '.card-template_type_default', 
                            handleCardClick, 
-                           (cardElement, cardId) => { deleteCardServer(cardElement, cardId, cardNew) },
-                           (cardElement, cardId) => { changeLikeServer(cardElement, cardId, cardNew)} );
+                           (cardId) => { deleteCardServer(cardId, cardNew) },
+                           (cardId) => { changeLikeServer(cardId, cardNew)} );
   return cardNew.generate();
 }
 
@@ -92,7 +91,7 @@ profileButtonEdit.addEventListener('click', (event) => {
   popupEditProfile.open();
   popupEditProfile.setInputValues(userInfo.getUserInfo());
   formEditProfileValidator.hideFormError();
-  formEditProfileValidator.disabledButtonSave(popupSaveButtonEdit);
+  formEditProfileValidator.disabledButtonSave();
 });
 
 const submitEditProfileForm = (valuesForm) => {
@@ -111,14 +110,13 @@ const submitEditProfileForm = (valuesForm) => {
     });
 }
 
-
   // организуем работу попапа добавления карточки
 const popupAddCard = new PopupWithForm('.popup_add', (valuesForm) => { submitAddCardForm(valuesForm) });
 
 profileButtonAdd.addEventListener('click', (event) => {
   popupAddCard.open();
   formAddCardValidator.hideFormError();
-  formAddCardValidator.disabledButtonSave(popupSaveButtonAdd);
+  formAddCardValidator.disabledButtonSave();
 });
 
 const submitAddCardForm = (valuesForm) => {
@@ -142,7 +140,7 @@ const popupEditAvatar = new PopupWithForm('.popup_avatar', (valuesForm) => { sub
 profileButtonAvatar.addEventListener('click', (event) => {
   popupEditAvatar.open();
   formEditAvatarValidator.hideFormError();
-  formEditAvatarValidator.disabledButtonSave(popupSaveButtonAvatar);
+  formEditAvatarValidator.disabledButtonSave();
 });
 
 const submitEditAvatarForm = (valuesForm) => {
